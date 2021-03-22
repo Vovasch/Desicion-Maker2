@@ -145,6 +145,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Decision-Maker2.cpp" />
+    <ClCompile Include="processing_of_main_testing_file.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="processing_of_main_testing_file.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
