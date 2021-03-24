@@ -9,6 +9,8 @@
 #include <vector>
 
 #include "processing_of_main_testing_file.h"
+#include "testing_unit.h"
+#include "gmm_model.h"
 
 using namespace std;
 using namespace mlpack;	
@@ -20,11 +22,14 @@ using namespace mlpack::util;
 // Else name will be difined as a main.txt automaticaly
 //#define if_need_user_to_enter_name_of_file
 
+int gmm_model::amount_of_models = gmm_model::Count_Amount_of_Models();
 
 int main()
 {
 	char name_of_main_testing_file_from_user[100];
-	char inner_name_of_main_testing_file[]{ "data/main.txt" };
+	//where we copy file from user
+	char inner_name_of_main_testing_file[]{ "data/main.txt\0" };
+	
 
 #ifdef if_need_user_to_enter_name_of_file
 
@@ -32,17 +37,26 @@ int main()
 
 #else
 
-	Init_Main_Tesgin_File(name_of_main_testing_file_from_user);
+	Init_Main_Testing_File(name_of_main_testing_file_from_user);
 
 #endif
+
+	const int the_least_amount_of_string_we_can_assign_result_of_test = 10; // TODO namespace & adequаte naming
 
 	//Need to copy in order not to change user's file
 	Copy_and_Parse_Main_Testing_File(name_of_main_testing_file_from_user);
 
-	int strings{0};
-
 	//Now we get amount of strings from copied and chenged file
-	strings = Get_Amount_Of_Strings_from_File(inner_name_of_main_testing_file);
+	int amount_of_string_in_main_testing_file = Get_Amount_Of_Strings_from_File(inner_name_of_main_testing_file);
+
+	const int amount_of_testing_units = amount_of_string_in_main_testing_file / the_least_amount_of_string_we_can_assign_result_of_test;
+
+	vector <pair<int, double>> indexes_of_sound_and_results(amount_of_testing_units);
+
+	vector <gmm_model> models_for_test;
+	models_for_test.reserve(gmm_model::amount_of_models);
+
+	gmm_model::Upload_Models(models_for_test);
 	
 
 	system("Pause");
