@@ -23,8 +23,10 @@ using namespace mlpack::util;
 //#define if_need_user_to_enter_name_of_file
 
 int gmm_model::amount_of_models = gmm_model::Count_Amount_of_Models();
+
 std::ifstream testing_unit::testing_file;
 
+int testing_unit::amount_of_blocks_of_strings_we_can_test_in_one_unit = 5;
 int main()
 {
 	char name_of_main_testing_file_from_user[100];
@@ -37,7 +39,7 @@ int main()
 	Get_Name_of_Main_Tesgin_File_From_User(name_of_main_testing_file_from_user);
 
 #else
-
+	// Name of main testing file will be defult = data/main.txt
 	Init_Main_Testing_File(name_of_main_testing_file_from_user);
 
 #endif
@@ -45,6 +47,7 @@ int main()
 	const int the_least_amount_of_string_we_can_assign_result_of_test = 10; // TODO namespace & adequаte naming
 
 	const int amount_of_layers_of_test = 5;
+
 	const int the_least_amount_of_string_to_be_tested = 50;
 
 	//Need to copy in order not to change user's file
@@ -55,6 +58,7 @@ int main()
 
 	const int amount_of_testing_units = amount_of_string_in_main_testing_file / the_least_amount_of_string_we_can_assign_result_of_test;
 
+	// where results of rough markup will be stored
 	vector <pair<int, double>> indexes_of_sound_and_result(amount_of_testing_units, { 0,-100 });
 
 	vector <gmm_model> models_for_test;
@@ -62,24 +66,23 @@ int main()
 
 	gmm_model::Upload_Models(models_for_test);
 
-
+	// Rough markuping
 	for (int i = 0; i < amount_of_layers_of_test; i++)
 	{
 		testing_unit::testing_file.open(inner_name_of_main_testing_file);
-		testing_unit::Go_To_Line(i * the_least_amount_of_string_we_can_assign_result_of_test);
+		testing_unit::Go_To_Line_In_Main_Testing_File(i * the_least_amount_of_string_we_can_assign_result_of_test);
 
-		for (int e = i; e < indexes_of_sound_and_result.size(); e+=5)
+		for (int e = i; e < indexes_of_sound_and_result.size(); e+= testing_unit::amount_of_blocks_of_strings_we_can_test_in_one_unit)
 		{
-			
 			testing_unit test;
-			test.Mesure_Probabilities(indexes_of_sound_and_result, e,models_for_test, the_least_amount_of_string_to_be_tested);
-			
+			test.Mesure_Probabilities(indexes_of_sound_and_result, e,models_for_test, the_least_amount_of_string_to_be_tested);	
 		}
 		testing_unit::testing_file.close();
 	}
 
 	int counter = 1;
 
+	// Showing results of rough markuping
 	for (auto i : indexes_of_sound_and_result)
 	{
 		cout << counter++ << " " << models_for_test[i.first].Get_Name_of_Model() << " " << i.second << endl;

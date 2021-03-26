@@ -19,14 +19,17 @@ class gmm_model
 	int  biggest_duration_in_santi_seconds_to_be_real;
 
 	// Forming a directory that will be used in loading of molel
+	// dir + name_of_file
 	static void Form_Directory(char* dir, char* name_of_file);
 
 	// Fromig a name of model set will be used by
-	// gmm_model::Init_Model() to set name
+	// bird.txt -> bird.bin
 	static void Form_Name_of_Model(char* name_of_file);
 
 	// Getting integer parameters from file with descriptions 
 	// of models
+	// LENGTH 5
+	// Function will return 5
 	static int Get_Information_From_Line(char* line);
 
 public:
@@ -35,6 +38,7 @@ public:
 
 	static int Count_Amount_of_Models();
 
+	// Using mlpack instrument upload models into objects GMM
 	static void Upload_Models(std::vector<gmm_model> &models);
 	
 	//Set parameteres of model and load gmm model

@@ -5,7 +5,6 @@ void gmm_model::Form_Directory(char* dir, char* name_of_file)
     int i = 1;
     while (dir[i] != '\0')
         i++;
- 
    
     int e = 0;
     while (name_of_file[e]!= '\0')
@@ -17,7 +16,6 @@ void gmm_model::Form_Directory(char* dir, char* name_of_file)
 
     i++;
     dir[i] = '\0';
-
 }
 
 void gmm_model::Form_Name_of_Model(char* name_of_file)
@@ -43,15 +41,13 @@ int gmm_model::Get_Information_From_Line(char* line)
 
 int gmm_model::Count_Amount_of_Models()
 {
-    // the most beautiful funciton in this program
-    // of course from stackoverflow
 
     int file_count = 0;
 
     DIR* dirp;
     struct dirent* entry;
     
-    dirp = opendir("data/models_description");
+    dirp = opendir("data/models");
     while ((entry = readdir(dirp)) != NULL)         
         if (entry->d_type == DT_REG) 
             file_count++;

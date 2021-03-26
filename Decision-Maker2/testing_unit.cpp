@@ -11,6 +11,7 @@ void testing_unit::Form_Testing_File(int amount_of_lines)
 
 	int curent_amount_of_string{ 0 };
 
+	// Coping from main testing file
 	while ((!testing_file.eof()) && (curent_amount_of_string < amount_of_lines))
 	{
 		testing_file.getline(data_to_copy, 1024);
@@ -23,7 +24,7 @@ void testing_unit::Form_Testing_File(int amount_of_lines)
 
 }
 
-void testing_unit::Go_To_Line(int line_number)
+void testing_unit::Go_To_Line_In_Main_Testing_File(int line_number)
 {
 	char c[1024];
 
@@ -41,7 +42,7 @@ void testing_unit::Mesure_Probabilities(std::vector<std::pair<int, double>>& tes
 
 	std::vector<double>res_of_Canculation_of_Probabilities_with_all_Bases(models_for_test.size(), 0);
 
-
+	// Canculating probabilities
 	for (int i = 0; i < models_for_test.size(); ++i)
 	{
 		for (int e = 0; e < this->matrix.n_cols; ++e)
@@ -51,13 +52,16 @@ void testing_unit::Mesure_Probabilities(std::vector<std::pair<int, double>>& tes
 		//std::cout << res_of_Canculation_of_Probabilities_with_all_Bases[i]<< std::endl;
 	}
 
+	// Find best result
 	auto it = std::max_element(res_of_Canculation_of_Probabilities_with_all_Bases.begin(), res_of_Canculation_of_Probabilities_with_all_Bases.end());
 	
+	// Get to iterator where to write result
 	auto block = test.begin()+place;
 
 	int counter = 0;
-
-	while(counter < 5 &&  block != test.end())
+	
+	// Writing results
+	while(counter < this->amount_of_blocks_of_strings_we_can_test_in_one_unit &&  block != test.end())
 	{
 		if (*it > block->second)
 		{

@@ -6,7 +6,7 @@
 void Init_Main_Testing_File(char * name_of_file);
 
 
-// 
+// Get name of file to be tested
 void Get_Name_of_Main_Tesgin_File_From_User(char *name_of_file);
 
 
