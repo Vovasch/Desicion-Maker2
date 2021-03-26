@@ -30,6 +30,7 @@ class gmm_model
 	static int Get_Information_From_Line(char* line);
 
 public:
+
 	static int amount_of_models;
 
 	static int Count_Amount_of_Models();
@@ -38,4 +39,7 @@ public:
 	
 	//Set parameteres of model and load gmm model
 	void Init_Model(const std::string name, const int smallest_value_to_be_defined, const int smallest_duration_in_santi_seconds_to_be_real, const int biggest_duration_in_santi_seconds_to_be_real);
+
+	mlpack::gmm::GMM& Get_GMM() { return this->gmm; }
+	std::string Get_Name_of_Model() { return this->name; }
 };

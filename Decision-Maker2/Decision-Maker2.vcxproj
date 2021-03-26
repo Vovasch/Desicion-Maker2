@@ -147,6 +147,7 @@
     <ClCompile Include="Decision-Maker2.cpp" />
     <ClCompile Include="gmm_model.cpp" />
     <ClCompile Include="processing_of_main_testing_file.cpp" />
+    <ClCompile Include="testing_unit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gmm_model.h" />

@@ -23,6 +23,7 @@ using namespace mlpack::util;
 //#define if_need_user_to_enter_name_of_file
 
 int gmm_model::amount_of_models = gmm_model::Count_Amount_of_Models();
+std::ifstream testing_unit::testing_file;
 
 int main()
 {
@@ -43,6 +44,9 @@ int main()
 
 	const int the_least_amount_of_string_we_can_assign_result_of_test = 10; // TODO namespace & adequаte naming
 
+	const int amount_of_layers_of_test = 5;
+	const int the_least_amount_of_string_to_be_tested = 50;
+
 	//Need to copy in order not to change user's file
 	Copy_and_Parse_Main_Testing_File(name_of_main_testing_file_from_user);
 
@@ -51,13 +55,35 @@ int main()
 
 	const int amount_of_testing_units = amount_of_string_in_main_testing_file / the_least_amount_of_string_we_can_assign_result_of_test;
 
-	vector <pair<int, double>> indexes_of_sound_and_results(amount_of_testing_units);
+	vector <pair<int, double>> indexes_of_sound_and_result(amount_of_testing_units, { 0,-100 });
 
 	vector <gmm_model> models_for_test;
 	models_for_test.reserve(gmm_model::amount_of_models);
 
 	gmm_model::Upload_Models(models_for_test);
-	
+
+
+	for (int i = 0; i < amount_of_layers_of_test; i++)
+	{
+		testing_unit::testing_file.open(inner_name_of_main_testing_file);
+		testing_unit::Go_To_Line(i * the_least_amount_of_string_we_can_assign_result_of_test);
+
+		for (int e = i; e < indexes_of_sound_and_result.size(); e+=5)
+		{
+			
+			testing_unit test;
+			test.Mesure_Probabilities(indexes_of_sound_and_result, e,models_for_test, the_least_amount_of_string_to_be_tested);
+			
+		}
+		testing_unit::testing_file.close();
+	}
+
+	int counter = 1;
+
+	for (auto i : indexes_of_sound_and_result)
+	{
+		cout << counter++ << " " << models_for_test[i.first].Get_Name_of_Model() << " " << i.second << endl;
+	}
 
 	system("Pause");
 	return 0;
