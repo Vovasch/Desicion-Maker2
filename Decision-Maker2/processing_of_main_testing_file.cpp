@@ -1,28 +1,6 @@
 #include "processing_of_main_testing_file.h"
 #include <iostream>
 
-void Init_Main_Testing_File(char* name_of_file)
-{
-	name_of_file[0] = 'm';
-	name_of_file[1] = 'a';
-	name_of_file[2] = 'i';
-	name_of_file[3] = 'n';
-	name_of_file[4] = '.';
-	name_of_file[5] = 't';
-	name_of_file[6] = 'x';
-	name_of_file[7] = 't';
-	name_of_file[8] = '\0';
-}
-
-void Get_Name_of_Main_Tesgin_File_From_User(char* name_of_file)
-{	
-		using namespace std;
-
-		cout << "Enter name of file you'd like to test with '.txt' in the end" << endl;
-
-		cin >> name_of_file;
-
-}
 
 void Copy_and_Parse_Main_Testing_File(const char* name_of_main_testing_file)
 {

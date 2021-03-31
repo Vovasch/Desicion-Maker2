@@ -49,7 +49,7 @@ void testing_unit::Mesure_Probabilities(std::vector<std::pair<int, double>>& tes
 			res_of_Canculation_of_Probabilities_with_all_Bases[i] += models_for_test[i].Get_GMM().LogProbability(matrix.unsafe_col(e));
 
 		res_of_Canculation_of_Probabilities_with_all_Bases[i] /= matrix.n_cols;
-		//std::cout << res_of_Canculation_of_Probabilities_with_all_Bases[i]<< std::endl;
+		std::cout << res_of_Canculation_of_Probabilities_with_all_Bases[i]<< std::endl;
 	}
 
 	// Find best result

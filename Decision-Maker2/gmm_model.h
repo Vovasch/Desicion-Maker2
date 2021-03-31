@@ -46,4 +46,5 @@ public:
 
 	mlpack::gmm::GMM& Get_GMM() { return this->gmm; }
 	std::string Get_Name_of_Model() { return this->name; }
+	double Get_Value_To_Be_Defined() { return this->smallest_value_to_be_defined; }
 };

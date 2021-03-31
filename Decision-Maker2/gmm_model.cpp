@@ -68,7 +68,7 @@ void gmm_model::Upload_Models(std::vector<gmm_model>& models)
     int params[amount_of_params_of_model];
 
     
-    char directory[100]{ "data/models_description/" }; 
+    char directory[1100]{ "data/models_description/" }; 
     char buff[200];
 
     dirp = opendir("data/models_description");
