@@ -66,18 +66,15 @@ void gmm_model::Upload_Models(std::vector<gmm_model>& models)
 
     const int amount_of_params_of_model = 3;
     int params[amount_of_params_of_model];
-
-    
-    char directory[1100]{ "data/models_description/" }; 
+ 
     char buff[200];
 
     dirp = opendir("data/models_description");
     while ((entry = readdir(dirp)) != NULL)
     {
-       
+        char directory[1000]{ "data/models_description/" };
         if (entry->d_type == DT_REG)
-        {
-           
+        {           
             gmm_model::Form_Directory(directory, entry->d_name);
 
             describing_file.open(directory);
@@ -95,19 +92,13 @@ void gmm_model::Upload_Models(std::vector<gmm_model>& models)
 
             gmm_model::Form_Name_of_Model(entry->d_name);
            
-            gmm_model gmm;
-            gmm.Init_Model(entry->d_name, params[0], params[1], params[2]);
+            gmm_model gmm(entry->d_name, params[0], params[1], params[2]);
 
             models.push_back(gmm);
             describing_file.close();
-
-        }
-
-                    
+        }           
     }
     closedir(dirp);
-
-    
 }
 
 
