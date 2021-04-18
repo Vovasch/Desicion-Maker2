@@ -14,7 +14,6 @@
 
 void Canculate_Probabilities(std::vector<std::vector<double>> &results, std::vector<gmm_model> models, char* testing_file);
 
-void Canculate_Sums_on_Smallets_Lengths(const std::vector<double>& input_data, std::vector<std::pair<double, int>> &results, int min_length_of_sound);
-
-
-void Find_Peaks(const std::vector<std::pair<double, int>>& input, std::vector<int>& peaks);
+// My teacher said that this is Veiterbi algorithm
+// But it appeared to be useless for us
+void Find_Best_Averages(const std::vector<double>& input_data, std::vector<std::pair<double, int>> &results, int min_length_of_sound);
