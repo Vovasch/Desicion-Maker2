@@ -65,3 +65,4 @@ void Find_Best_Averages(const std::vector<double>& input_data, std::vector<std::
 		}
 	}
 }
+

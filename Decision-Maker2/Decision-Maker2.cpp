@@ -54,15 +54,14 @@ int main(int argc, char* argv[])
 
 
 		//minus 1 for last string as a \n
-		const int amount_of_probabilities_to_canculate{ amount_of_strings_in_main_tasting_file - 1 };
+		const int amount_of_probabilities{ amount_of_strings_in_main_tasting_file - 1 };
 
-		vector<vector<double>> probabilities(gmm_model::amount_of_models, { 0 });
-
-		for (auto& it : probabilities)
-			it.resize(amount_of_probabilities_to_canculate, 0);
+		vector<vector<double>> probabilities(gmm_model::amount_of_models, vector<double>(amount_of_probabilities, 0));
 
 
 		Canculate_Probabilities(probabilities, models_for_test, name_of_main_testing_file);
+
+		
 	}
 	catch (std::exception& ex)
 	{

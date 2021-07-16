@@ -30,13 +30,13 @@ void gmm_model::Form_Name_of_Model(char* name_of_file)
 
 }
 
-int gmm_model::Get_Information_From_Line(char* line)
+double gmm_model::Get_Information_From_Line(char* line)
 {
     int i = 2;
-    while (line[i] != ' ')
+    while (line[i] != ' ') 
         i++;
 
-    return atoi(&line[i]);
+    return atof(&line[i]);
 }
 
 int gmm_model::Count_Amount_of_Models()
@@ -64,8 +64,8 @@ void gmm_model::Upload_Models(std::vector<gmm_model>& models)
 
     std::ifstream describing_file;
 
-    const int amount_of_params_of_model = 3;
-    int params[amount_of_params_of_model];
+    const int amount_of_params_of_model = 4;
+    double params[amount_of_params_of_model];
  
     char buff[200];
 
@@ -92,7 +92,7 @@ void gmm_model::Upload_Models(std::vector<gmm_model>& models)
 
             gmm_model::Form_Name_of_Model(entry->d_name);
            
-            gmm_model gmm(entry->d_name, params[0], params[1], params[2]);
+            gmm_model gmm(entry->d_name, params[0], params[1], params[2], params[3]);
 
             models.push_back(gmm);
             describing_file.close();
@@ -106,7 +106,7 @@ void gmm_model::Upload_Models(std::vector<gmm_model>& models)
 void gmm_model::Init_Model(const std::string name, const int smallest_value_to_be_defined, const int smallest_duration_in_santi_seconds_to_be_real, const int biggest_duration_in_santi_seconds_to_be_real)
 {
     this->name = name;
-    this->smallest_value_to_be_defined = smallest_value_to_be_defined;
+    this->min_value_to_be_defined = smallest_value_to_be_defined;
     this->smallest_duration_in_santi_seconds_to_be_real = smallest_duration_in_santi_seconds_to_be_real;
     this->biggest_duration_in_santi_seconds_to_be_real = biggest_duration_in_santi_seconds_to_be_real;
 

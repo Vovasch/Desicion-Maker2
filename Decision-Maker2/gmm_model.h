@@ -14,7 +14,8 @@ class gmm_model
 	std::string name;
 	mlpack::gmm::GMM gmm;
 
-	int smallest_value_to_be_defined;
+	int max_value_to_be_defined;
+	int min_value_to_be_defined;
 	int smallest_duration_in_santi_seconds_to_be_real;
 	int  biggest_duration_in_santi_seconds_to_be_real;
 
@@ -26,11 +27,11 @@ class gmm_model
 	// bird.txt -> bird.bin
 	static void Form_Name_of_Model(char* name_of_file);
 
-	// Getting integer parameters from file with descriptions 
+	// Getting double parameters from file with descriptions 
 	// of models
 	// LENGTH 5
 	// Function will return 5
-	static int Get_Information_From_Line(char* line);
+	static double Get_Information_From_Line(char* line);
 
 public:
 
@@ -38,9 +39,10 @@ public:
 
 	static int Count_Amount_of_Models();
 
-	gmm_model(std::string name, int smallest_value_to_be_defined, int smallest_duration_in_santi_seconds_to_be_real, int biggest_duration_in_santi_seconds_to_be_real) :
+	gmm_model(std::string name, int max_value_to_be_defined, int min_value_to_be_defined, int smallest_duration_in_santi_seconds_to_be_real, int biggest_duration_in_santi_seconds_to_be_real) :
 		name(name),
-		smallest_value_to_be_defined(smallest_value_to_be_defined),
+		max_value_to_be_defined(max_value_to_be_defined),
+		min_value_to_be_defined(min_value_to_be_defined),
 		smallest_duration_in_santi_seconds_to_be_real(smallest_duration_in_santi_seconds_to_be_real),
 		biggest_duration_in_santi_seconds_to_be_real(biggest_duration_in_santi_seconds_to_be_real)
 	{
@@ -62,7 +64,9 @@ public:
 
 	std::string Get_Name_of_Model() const { return this->name; }
 	
-	double Get_Value_To_Be_Defined() const { return this->smallest_value_to_be_defined; }
+	double Get_Min_Value_To_Be_Defined() const { return this->min_value_to_be_defined; }
+
+	double Get_Max_Value_To_Be_Defined() const { return this->max_value_to_be_defined; }
 	
 	int Get_Smallest_Duration() const { return this->smallest_duration_in_santi_seconds_to_be_real; }
 	
