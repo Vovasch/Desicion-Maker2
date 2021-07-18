@@ -13,8 +13,9 @@
 #include <algorithm>
 #include <cmath>
 #include <exception>
+#include <thread>
 
-#include "processing_of_main_testing_file.h"
+#include "file_processing.h"
 #include "gmm_model.h"
 #include "testing_instruments.h"
 
@@ -46,6 +47,8 @@ int main(int argc, char* argv[])
 
 	gmm_model::Upload_Models(models_for_test);
 
+	Create_Files_For_Results(models_for_test);
+
 	int amount_of_strings_in_main_tasting_file;
 
 	try
@@ -62,12 +65,18 @@ int main(int argc, char* argv[])
 		Canculate_Probabilities(probabilities, models_for_test, name_of_main_testing_file);
 
 		
+
+
 	}
 	catch (std::exception& ex)
 	{
 		std::cout << ex.what();
 		return -1;
 	}
+
+	std::thread th;
+	
+
 
 	system("Pause");
 	return 0;

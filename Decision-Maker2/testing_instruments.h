@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef TESTING_INSTRUMENTS
+#define TESTING_INSTRUMENTS
+
 #include <iostream>
 #include <string>
 #include <mlpack/core/util/io.hpp>
@@ -18,3 +21,8 @@ void Canculate_Probabilities(std::vector<std::vector<double>> &results, std::vec
 // My teacher said that this is Veiterbi algorithm
 // But it appeared to be useless for us
 void Find_Best_Averages(const std::vector<double>& input_data, std::vector<std::pair<double, int>> &results, int min_length_of_sound);
+
+
+void Rough_MurkUp(int &stage, bool&end, const std::vector<std::vector<double>> &probabilites);
+
+#endif

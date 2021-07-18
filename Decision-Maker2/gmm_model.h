@@ -1,4 +1,7 @@
 #pragma once
+#ifndef GMM_MODEL
+#define GMM_MODEL
+
 #pragma comment(lib, "mlpack.lib")
 #include <string>
 #include <mlpack/methods/gmm/gmm.hpp>
@@ -19,19 +22,15 @@ class gmm_model
 	int smallest_duration_in_santi_seconds_to_be_real;
 	int  biggest_duration_in_santi_seconds_to_be_real;
 
-	// Forming a directory that will be used in loading of molel
-	// dir + name_of_file
-	static void Form_Directory(char* dir, char* name_of_file);
-
-	// Fromig a name of model set will be used by
-	// bird.txt -> bird.bin
-	static void Form_Name_of_Model(char* name_of_file);
-
-	// Getting double parameters from file with descriptions 
-	// of models
-	// LENGTH 5
-	// Function will return 5
+// Getting double parameters from file with descriptions 
+// of models
+// LENGTH 5
+// Function will return 5
 	static double Get_Information_From_Line(char* line);
+
+// Fromig a name of model set will be used by
+// bird.bin -> bird
+	static void Form_Name_of_Model(char* name_of_file);
 
 public:
 
@@ -55,11 +54,6 @@ public:
 		mlpack::data::Load(path, "model", this->gmm);
 	}
 
-
-	
-	//Set parameteres of model and load gmm model
-	void Init_Model(const std::string name, const int smallest_value_to_be_defined, const int smallest_duration_in_santi_seconds_to_be_real, const int biggest_duration_in_santi_seconds_to_be_real);
-
 	mlpack::gmm::GMM& Get_GMM()  { return this->gmm; }
 
 	std::string Get_Name_of_Model() const { return this->name; }
@@ -76,3 +70,5 @@ public:
 	static void Upload_Models(std::vector<gmm_model>& models);
 
 };
+
+#endif

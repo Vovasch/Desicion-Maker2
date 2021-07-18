@@ -145,13 +145,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Decision-Maker2.cpp" />
+    <ClCompile Include="file_processing.cpp" />
     <ClCompile Include="gmm_model.cpp" />
-    <ClCompile Include="processing_of_main_testing_file.cpp" />
     <ClCompile Include="testing_instruments.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="file_processing.h" />
     <ClInclude Include="gmm_model.h" />
-    <ClInclude Include="processing_of_main_testing_file.h" />
     <ClInclude Include="testing_instruments.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,34 +1,6 @@
 #include "gmm_model.h"
+#include "file_processing.h"
 
-void gmm_model::Form_Directory(char* dir, char* name_of_file)
-{
-    int i = 1;
-    while (dir[i] != '\0')
-        i++;
-   
-    int e = 0;
-    while (name_of_file[e]!= '\0')
-    {
-        dir[i] = name_of_file[e];
-        i++;
-        e++;
-    }
-
-    i++;
-    dir[i] = '\0';
-}
-
-void gmm_model::Form_Name_of_Model(char* name_of_file)
-{
-
-    int lenght_of_tipe = 4; //.txt
-
-    int i = 0;
-    while (name_of_file[i] != '\0')
-        ++i;
-    name_of_file[i - lenght_of_tipe] = '\0';
-
-}
 
 double gmm_model::Get_Information_From_Line(char* line)
 {
@@ -37,6 +9,18 @@ double gmm_model::Get_Information_From_Line(char* line)
         i++;
 
     return atof(&line[i]);
+}
+
+void gmm_model::Form_Name_of_Model(char* name_of_file)
+{
+
+    int lenght_of_File_tipe = 4; //.txt
+
+    int i = 0;
+    while (name_of_file[i] != '\0')
+        ++i;
+    name_of_file[i - lenght_of_File_tipe] = '\0';
+
 }
 
 int gmm_model::Count_Amount_of_Models()
@@ -75,7 +59,7 @@ void gmm_model::Upload_Models(std::vector<gmm_model>& models)
         char directory[1000]{ "data/models_description/" };
         if (entry->d_type == DT_REG)
         {           
-            gmm_model::Form_Directory(directory, entry->d_name);
+            ConcatinateDirAndNameOfFile(directory, entry->d_name);
 
             describing_file.open(directory);
 
@@ -90,7 +74,7 @@ void gmm_model::Upload_Models(std::vector<gmm_model>& models)
                 ++i;
             }
 
-            gmm_model::Form_Name_of_Model(entry->d_name);
+            Form_Name_of_Model(entry->d_name);
            
             gmm_model gmm(entry->d_name, params[0], params[1], params[2], params[3]);
 
@@ -102,19 +86,3 @@ void gmm_model::Upload_Models(std::vector<gmm_model>& models)
 }
 
 
-
-void gmm_model::Init_Model(const std::string name, const int smallest_value_to_be_defined, const int smallest_duration_in_santi_seconds_to_be_real, const int biggest_duration_in_santi_seconds_to_be_real)
-{
-    this->name = name;
-    this->min_value_to_be_defined = smallest_value_to_be_defined;
-    this->smallest_duration_in_santi_seconds_to_be_real = smallest_duration_in_santi_seconds_to_be_real;
-    this->biggest_duration_in_santi_seconds_to_be_real = biggest_duration_in_santi_seconds_to_be_real;
-
-    std::string path{ "data/models/" };
-    std::string format{ ".bin" };
-
-    path += name;
-    path += format;
-
-    mlpack::data::Load(path, "model", this->gmm);
-}

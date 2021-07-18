@@ -66,3 +66,7 @@ void Find_Best_Averages(const std::vector<double>& input_data, std::vector<std::
 	}
 }
 
+void Rough_MurkUp(int& stage, bool& end, const std::vector<std::vector<double>>& probabilites)
+{
+}
+
