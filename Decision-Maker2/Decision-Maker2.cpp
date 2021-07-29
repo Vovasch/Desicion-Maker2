@@ -24,7 +24,6 @@ using namespace mlpack;
 using namespace mlpack::gmm;
 using namespace mlpack::util;
 
-
 int gmm_model::amount_of_models = gmm_model::Count_Amount_of_Models();
 
 int main(int argc, char* argv[])
@@ -51,21 +50,17 @@ int main(int argc, char* argv[])
 
 	int amount_of_strings_in_main_tasting_file;
 
+	amount_of_strings_in_main_tasting_file = Get_Amount_Of_Strings_from_File(name_of_main_testing_file);
+
+
+	//minus 1 for last string as a \n
+	const int amount_of_probabilities{ amount_of_strings_in_main_tasting_file - 1 };
+
+	vector<vector<double>> probabilities(gmm_model::amount_of_models, vector<double>(amount_of_probabilities, 0));
+
 	try
 	{
-		amount_of_strings_in_main_tasting_file = Get_Amount_Of_Strings_from_File(name_of_main_testing_file);
-
-
-		//minus 1 for last string as a \n
-		const int amount_of_probabilities{ amount_of_strings_in_main_tasting_file - 1 };
-
-		vector<vector<double>> probabilities(gmm_model::amount_of_models, vector<double>(amount_of_probabilities, 0));
-
-
 		Canculate_Probabilities(probabilities, models_for_test, name_of_main_testing_file);
-
-		
-
 
 	}
 	catch (std::exception& ex)
@@ -74,8 +69,9 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	std::thread th;
+	Create_Files_For_Results(models_for_test);
 	
+	Rough_MurkUp(probabilities, models_for_test);
 
 
 	system("Pause");

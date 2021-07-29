@@ -1,5 +1,4 @@
 #include "testing_instruments.h"
-#include <exception>
 
 void Canculate_Probabilities(std::vector<std::vector<double>>& results, std::vector<gmm_model> models, char* testing_file)
 {
@@ -66,7 +65,51 @@ void Find_Best_Averages(const std::vector<double>& input_data, std::vector<std::
 	}
 }
 
-void Rough_MurkUp(int& stage, bool& end, const std::vector<std::vector<double>>& probabilites)
+void Rough_MurkUp(const std::vector<std::vector<double>>& probabilites, const std::vector<gmm_model>& models)
 {
-}
+	bool* lookForEndingOfSound = new bool[probabilites.size()]{ 0 };
 
+	double* sumCurrent = new double[probabilites.size()]{ 0 };
+
+	double* averageOfProbabilitesCurrent = new double[probabilites.size()]{ 0 };
+	
+	
+	for (int i = 0; i < probabilites[0].size(); i++)
+	{
+		for (int e = 0; e < probabilites.size(); e++)
+		{
+			sumCurrent[e] += probabilites[e][i];
+			if (i < models[e].Get_Smallest_Duration())
+			{
+				averageOfProbabilitesCurrent[e] = sumCurrent[e] / i+1;
+			}
+			else
+			{
+				sumCurrent[e] -= probabilites[e][i - models[e].Get_Smallest_Duration()];
+				averageOfProbabilitesCurrent[e] = sumCurrent[e] / models[e].Get_Smallest_Duration();
+			}
+
+			if (!lookForEndingOfSound[e])
+			{
+				if (averageOfProbabilitesCurrent[e] >= models[e].Get_Max_Value_To_Be_Defined())
+				{
+					FixStartOfEndOfSoundInFile(i, models[e].Get_Name_of_Model());
+					lookForEndingOfSound[e] = 1;
+				}
+			}
+			else
+			{
+				if (averageOfProbabilitesCurrent[e] < models[e].Get_Min_Value_To_Be_Defined())
+				{
+					FixStartOfEndOfSoundInFile(i, models[e].Get_Name_of_Model());
+					lookForEndingOfSound[e] = 0;
+				}
+			}
+		}
+
+		if (i % 200 == 0)
+		{
+			// show results
+		}
+	}
+}

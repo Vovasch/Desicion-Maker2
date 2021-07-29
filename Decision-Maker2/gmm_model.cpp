@@ -1,7 +1,6 @@
 #include "gmm_model.h"
 #include "file_processing.h"
 
-
 double gmm_model::Get_Information_From_Line(char* line)
 {
     int i = 2;
@@ -13,19 +12,16 @@ double gmm_model::Get_Information_From_Line(char* line)
 
 void gmm_model::Form_Name_of_Model(char* name_of_file)
 {
-
     int lenght_of_File_tipe = 4; //.txt
 
     int i = 0;
     while (name_of_file[i] != '\0')
         ++i;
     name_of_file[i - lenght_of_File_tipe] = '\0';
-
 }
 
 int gmm_model::Count_Amount_of_Models()
 {
-
     int file_count = 0;
 
     DIR* dirp;
@@ -84,5 +80,3 @@ void gmm_model::Upload_Models(std::vector<gmm_model>& models)
     }
     closedir(dirp);
 }
-
-

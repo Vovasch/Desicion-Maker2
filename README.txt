@@ -34,8 +34,6 @@ THE_LONGEST_DURATION: -1
 
 And transfer them into directory: data/models_description.
 
-The some magic is onto happening, but we still think about kind of this magic.
-
 We(me and my teacher) thought about Viterby algorithm, but tests showed that this algorithm doesn't match our needs.
 
 Results will be like: Sound "bird" started on 2d second and stopped on 5th seconds.

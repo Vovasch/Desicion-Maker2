@@ -1,7 +1,4 @@
 #include "file_processing.h"
-#include <iostream>
-
-
 
 int Get_Amount_Of_Strings_from_File(const char* name_of_file)
 {
@@ -27,11 +24,9 @@ int Get_Amount_Of_Strings_from_File(const char* name_of_file)
 
 			return amount_of_strings;
 		}
-
 	}
 	throw std::exception("FATAL ERROR. Can't open file");
 	return 0;
-
 }
 
 void ConcatinateDirAndNameOfFile(char* dir, char* name_of_file)
@@ -79,3 +74,34 @@ void Create_Files_For_Results(std::vector<gmm_model>& models)
 	}
 }
 
+void FixStartOfEndOfSoundInFile(int position, std::string nameOfModel)
+{
+	char fileWhereToSave[1000]{ "results/" };
+	int e = 8;
+	
+	for (auto c : nameOfModel)
+	{
+		fileWhereToSave[e] = c;
+		e++;
+	}
+	fileWhereToSave[e] = '.';
+	fileWhereToSave[e + 1] = 't';
+	fileWhereToSave[e + 2] = 'x';
+	fileWhereToSave[e + 3] = 't';
+	fileWhereToSave[e + 4] = '\0';
+
+
+	std::ofstream file;
+	file.open(fileWhereToSave, std::ios::app);
+	
+
+	std::stringstream result;
+
+	result << position;
+
+	file << result.str();
+	file << "\n";
+
+	file.close();
+
+}
