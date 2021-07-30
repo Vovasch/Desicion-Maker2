@@ -1,5 +1,24 @@
 #include "file_processing.h"
 
+void GetAllNameOfFilesFromDirectory(std::vector<std::string>& namesOfFilesInDirectory, const char* directory)
+{
+	DIR* dirp;
+
+	struct dirent* entry;
+
+	// recieving all names of sound of directory with results
+
+	dirp = opendir(directory);
+
+	while ((entry = readdir(dirp)) != NULL)
+		if (entry->d_type == DT_REG)
+		{
+			namesOfFilesInDirectory.push_back(entry->d_name);
+		}
+
+	closedir(dirp);
+}
+
 int Get_Amount_Of_Strings_from_File(const char* name_of_file)
 {
 	if (name_of_file)
@@ -29,70 +48,53 @@ int Get_Amount_Of_Strings_from_File(const char* name_of_file)
 	return 0;
 }
 
-void ConcatinateDirAndNameOfFile(char* dir, char* name_of_file)
-{
-	int i = 1;
-	while (dir[i] != '\0')
-		i++;
-
-	int e = 0;
-	while (name_of_file[e] != '\0')
-	{
-		dir[i] = name_of_file[e];
-		i++;
-		e++;
-	}
-
-	i++;
-	dir[i] = '\0';
-}
-
-void Create_Files_For_Results(std::vector<gmm_model>& models)
+void Create_Files_For_Results(const std::vector<std::string>& namesOfFiles, const char* directory)
 {
 	std::ofstream* files;
-	files = new std::ofstream[gmm_model::amount_of_models];
+	files = new std::ofstream[namesOfFiles.size()];
 	
 	for (int i = 0; i < gmm_model::amount_of_models; i++)
 	{
-		char dir[1000]{"results/"};
+		
+		char dirAndNameOfFile[1000];
 
-		int e = 8;
-		for (auto c : models[i].Get_Name_of_Model())
-		{
-			dir[e] = c;
-			e++;
-		}
-		dir[e] = '.';
-		dir[e + 1] = 't';
-		dir[e + 2] = 'x';
-		dir[e + 3] = 't';
-		dir[e + 4] = '\0';
-
-		files[i].open(dir);
+		ConcatinateDirAndNameOfFile(dirAndNameOfFile, directory, namesOfFiles[i]);
+		
+		files[i].open(dirAndNameOfFile);
 		files[i].clear();
 		files[i].close();
 	}
 }
 
-void FixStartOfEndOfSoundInFile(int position, std::string nameOfModel)
+void ConcatinateDirAndNameOfFile(char* result, const char* dir, const std::string name_of_file)
 {
-	char fileWhereToSave[1000]{ "results/" };
-	int e = 8;
-	
-	for (auto c : nameOfModel)
+	int i;
+	for (i = 0; dir[i] != '\0'; i++)
 	{
-		fileWhereToSave[e] = c;
-		e++;
+		result[i] = dir[i];
 	}
-	fileWhereToSave[e] = '.';
-	fileWhereToSave[e + 1] = 't';
-	fileWhereToSave[e + 2] = 'x';
-	fileWhereToSave[e + 3] = 't';
-	fileWhereToSave[e + 4] = '\0';
 
+	result[i] = '/';
+	i++;
+
+	for (auto c : name_of_file)
+	{
+		result[i] = c;
+		i++;
+	}
+
+	result[i] = '\0';
+}
+
+void FixStartAndEndOfSoundInFile(int position, const char* dirWithResults, const std::string nameOfFileOfModel)
+{
+	char dirAndNameOfFileWhereToSave[1000];
+	
+	ConcatinateDirAndNameOfFile(dirAndNameOfFileWhereToSave, dirWithResults, nameOfFileOfModel);
+	
 
 	std::ofstream file;
-	file.open(fileWhereToSave, std::ios::app);
+	file.open(dirAndNameOfFileWhereToSave, std::ios::app);
 	
 
 	std::stringstream result;
@@ -105,3 +107,5 @@ void FixStartOfEndOfSoundInFile(int position, std::string nameOfModel)
 	file.close();
 
 }
+
+

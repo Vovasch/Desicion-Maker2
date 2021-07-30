@@ -65,7 +65,7 @@ void Find_Best_Averages(const std::vector<double>& input_data, std::vector<std::
 	}
 }
 
-void Rough_MurkUp(const std::vector<std::vector<double>>& probabilites, const std::vector<gmm_model>& models)
+void Rough_MurkUp(const std::vector<std::vector<double>>& probabilites, const std::vector<gmm_model> models, const char* dirWithWhereToSaveResults, const std::vector<std::string> nameOfFilesWhereToSaveResults)
 {
 	bool* lookForEndingOfSound = new bool[probabilites.size()]{ 0 };
 
@@ -93,7 +93,7 @@ void Rough_MurkUp(const std::vector<std::vector<double>>& probabilites, const st
 			{
 				if (averageOfProbabilitesCurrent[e] >= models[e].Get_Max_Value_To_Be_Defined())
 				{
-					FixStartOfEndOfSoundInFile(i, models[e].Get_Name_of_Model());
+					FixStartAndEndOfSoundInFile(i, dirWithWhereToSaveResults, nameOfFilesWhereToSaveResults[e]);
 					lookForEndingOfSound[e] = 1;
 				}
 			}
@@ -101,7 +101,7 @@ void Rough_MurkUp(const std::vector<std::vector<double>>& probabilites, const st
 			{
 				if (averageOfProbabilitesCurrent[e] < models[e].Get_Min_Value_To_Be_Defined())
 				{
-					FixStartOfEndOfSoundInFile(i, models[e].Get_Name_of_Model());
+					FixStartAndEndOfSoundInFile(i, dirWithWhereToSaveResults, nameOfFilesWhereToSaveResults[e]);
 					lookForEndingOfSound[e] = 0;
 				}
 			}

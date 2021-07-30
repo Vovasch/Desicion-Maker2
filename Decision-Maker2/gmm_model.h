@@ -38,20 +38,15 @@ public:
 
 	static int Count_Amount_of_Models();
 
-	gmm_model(std::string name, int max_value_to_be_defined, int min_value_to_be_defined, int smallest_duration_in_santi_seconds_to_be_real, int biggest_duration_in_santi_seconds_to_be_real) :
+	gmm_model(std::string name, int max_value_to_be_defined, int min_value_to_be_defined, int smallest_duration_in_santi_seconds_to_be_real, int biggest_duration_in_santi_seconds_to_be_real, const char* dirWithModel) :
 		name(name),
 		max_value_to_be_defined(max_value_to_be_defined),
 		min_value_to_be_defined(min_value_to_be_defined),
 		smallest_duration_in_santi_seconds_to_be_real(smallest_duration_in_santi_seconds_to_be_real),
 		biggest_duration_in_santi_seconds_to_be_real(biggest_duration_in_santi_seconds_to_be_real)
 	{
-		std::string path{ "data/models/" };
-		std::string format{ ".bin" };
 
-		path += name;
-		path += format;
-
-		mlpack::data::Load(path, "model", this->gmm);
+		mlpack::data::Load(dirWithModel, "model", this->gmm);
 	}
 
 	mlpack::gmm::GMM& Get_GMM()  { return this->gmm; }
@@ -66,8 +61,12 @@ public:
 	
 	int Get_Biggest_Duration() const {return this->biggest_duration_in_santi_seconds_to_be_real;}
 
-	// Using mlpack instrument upload models into objects GMM
-	static void Upload_Models(std::vector<gmm_model>& models);
+	// Using mlpack instrument upload models into GMM objects
+	static void Upload_Models(std::vector<gmm_model>& models, 
+		const char* dirWitDescriptionOfModels,
+		const char* dirWithModels,
+		const std::vector<std::string> namesOfFilesWithDescriptionOfModels,
+		const std::vector<std::string> namesOfFilesWithModels);
 
 };
 

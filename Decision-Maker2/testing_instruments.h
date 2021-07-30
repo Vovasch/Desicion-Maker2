@@ -23,7 +23,6 @@ void Canculate_Probabilities(std::vector<std::vector<double>> &results, std::vec
 // But it appeared to be useless for us
 void Find_Best_Averages(const std::vector<double>& input_data, std::vector<std::pair<double, int>> &results, int min_length_of_sound);
 
-
-void Rough_MurkUp(const std::vector<std::vector<double>>& probabilites, const std::vector <gmm_model>& models);
+void Rough_MurkUp(const std::vector<std::vector<double>>& probabilites, const std::vector<gmm_model> models, const char* dirWithWhereToSaveResults, const std::vector<std::string> nameOfFilesWhereToSaveResults);
 
 #endif

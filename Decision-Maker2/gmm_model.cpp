@@ -37,46 +37,44 @@ int gmm_model::Count_Amount_of_Models()
     return file_count;
 }
 
-void gmm_model::Upload_Models(std::vector<gmm_model>& models)
+void gmm_model::Upload_Models(std::vector<gmm_model>& models, 
+    const char* dirWitDescriptionOfModels,
+    const char* dirWithModels,
+    const std::vector<std::string> namesOfFilesWithDescriptionOfModels,
+    const std::vector<std::string> namesOfFilesWithModels)
 {
-    DIR* dirp;
-    struct dirent* entry;
-
     std::ifstream describing_file;
 
     const int amount_of_params_of_model = 4;
     double params[amount_of_params_of_model];
  
-    char buff[200];
-
-    dirp = opendir("data/models_description");
-    while ((entry = readdir(dirp)) != NULL)
+    for (int i = 0; i < namesOfFilesWithModels.size(); i++)
     {
-        char directory[1000]{ "data/models_description/" };
-        if (entry->d_type == DT_REG)
-        {           
-            ConcatinateDirAndNameOfFile(directory, entry->d_name);
+        char buff[200];
 
-            describing_file.open(directory);
+        char directoryAndNameOfDescribingFile[1000];
 
-            int i = 0;
+        ConcatinateDirAndNameOfFile(directoryAndNameOfDescribingFile, dirWitDescriptionOfModels, namesOfFilesWithDescriptionOfModels[i]);
 
-            while ((!describing_file.eof()))
-            {
-                describing_file.getline(buff, 200);
-                
-                params[i] = gmm_model::Get_Information_From_Line(buff);
+        describing_file.open(directoryAndNameOfDescribingFile);
 
-                ++i;
-            }
+        int e = 0;
 
-            Form_Name_of_Model(entry->d_name);
-           
-            gmm_model gmm(entry->d_name, params[0], params[1], params[2], params[3]);
+        while ((!describing_file.eof()))
+        {
+            describing_file.getline(buff, 200);
 
-            models.push_back(gmm);
-            describing_file.close();
-        }           
+            params[e] = gmm_model::Get_Information_From_Line(buff);
+
+            ++e;
+        }
+
+        char directoryAndNameOfModel[1000];
+        ConcatinateDirAndNameOfFile(directoryAndNameOfModel, dirWithModels, namesOfFilesWithModels[i]);
+
+        gmm_model gmm(namesOfFilesWithModels[i], params[0], params[1], params[2], params[3], directoryAndNameOfModel);
+
+        models.push_back(gmm);
+        describing_file.close();
     }
-    closedir(dirp);
 }
