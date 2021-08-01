@@ -11,6 +11,8 @@
 #include<sstream>
 #include<iostream>
 
+int CountAmountOfFilsInDir(const char* dir);
+
 void GetAllNameOfFilesFromDirectory(std::vector<std::string>& namesOfFilesInDirectory, const char* directory);
 
 void Create_Files_For_Results(const std::vector<std::string>& namesOfFiles, const char* directory);

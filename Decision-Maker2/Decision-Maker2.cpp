@@ -26,8 +26,6 @@ using namespace mlpack;
 using namespace mlpack::gmm;
 using namespace mlpack::util;
 
-int gmm_model::amount_of_models = gmm_model::Count_Amount_of_Models();
-
 int main(int argc, char* argv[])
 {
 	// all important directories
@@ -49,14 +47,17 @@ int main(int argc, char* argv[])
 	std::vector<std::string> DesciptionsOfModelsFileName;
 	std::vector<std::string> ResultFileNames;
 
-	ModelsFileNames.			 reserve(gmm_model::amount_of_models);
-	DesciptionsOfModelsFileName. reserve(gmm_model::amount_of_models);
-	ResultFileNames.			 reserve(gmm_model::amount_of_models);
+	// amount of data sets
+	const int amountOfModels = CountAmountOfFilsInDir(models_Dir);
+
+	ModelsFileNames.			 reserve(amountOfModels);
+	DesciptionsOfModelsFileName. reserve(amountOfModels);
+	ResultFileNames.			 reserve(amountOfModels);
 
 	GetAllNameOfFilesFromDirectory(ModelsFileNames,				models_Dir);
 	GetAllNameOfFilesFromDirectory(DesciptionsOfModelsFileName, descriptionOfModels_Dir);
 
-	// type of files with results and models descriptions are same
+	// types and names of files with results and models descriptions are same
 	ResultFileNames = DesciptionsOfModelsFileName;
 
 	Create_Files_For_Results(ResultFileNames, results_Dir);
@@ -76,13 +77,9 @@ int main(int argc, char* argv[])
 	}
 
 	vector <gmm_model> models_for_test;
-	models_for_test.reserve(gmm_model::amount_of_models);
+	models_for_test.reserve(amountOfModels);
 
-	gmm_model::Upload_Models(models_for_test, 
-		descriptionOfModels_Dir,
-		models_Dir,
-		DesciptionsOfModelsFileName,
-		ModelsFileNames);
+	gmm_model::Upload_Models(models_for_test, descriptionOfModels_Dir, models_Dir, DesciptionsOfModelsFileName, ModelsFileNames);
 
 
 	int amount_of_strings_in_main_tasting_file;
@@ -93,7 +90,7 @@ int main(int argc, char* argv[])
 	//minus 1 for last string as a \n
 	const int amount_of_probabilities{ amount_of_strings_in_main_tasting_file - 1 };
 
-	vector<vector<double>> probabilities(gmm_model::amount_of_models, vector<double>(amount_of_probabilities, 0));
+	vector<vector<double>> probabilities(amountOfModels, vector<double>(amount_of_probabilities, 0));
 
 	try
 	{
@@ -107,7 +104,7 @@ int main(int argc, char* argv[])
 	
 	Rough_MurkUp(probabilities, models_for_test, results_Dir, ResultFileNames);
 
-	//SimpleShowingOfResults();
+	SortedShowingOfResults(results_Dir, ResultFileNames);
 
 	system("Pause");
 	return 0;

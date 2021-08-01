@@ -20,23 +20,6 @@ void gmm_model::Form_Name_of_Model(char* name_of_file)
     name_of_file[i - lenght_of_File_tipe] = '\0';
 }
 
-int gmm_model::Count_Amount_of_Models()
-{
-    int file_count = 0;
-
-    DIR* dirp;
-    struct dirent* entry;
-    
-    dirp = opendir("data/models");
-    while ((entry = readdir(dirp)) != NULL)         
-        if (entry->d_type == DT_REG) 
-            file_count++;
-
-    closedir(dirp);
-    
-    return file_count;
-}
-
 void gmm_model::Upload_Models(std::vector<gmm_model>& models, 
     const char* dirWitDescriptionOfModels,
     const char* dirWithModels,

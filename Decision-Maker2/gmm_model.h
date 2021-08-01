@@ -34,10 +34,6 @@ class gmm_model
 
 public:
 
-	static int amount_of_models;
-
-	static int Count_Amount_of_Models();
-
 	gmm_model(std::string name, int max_value_to_be_defined, int min_value_to_be_defined, int smallest_duration_in_santi_seconds_to_be_real, int biggest_duration_in_santi_seconds_to_be_real, const char* dirWithModel) :
 		name(name),
 		max_value_to_be_defined(max_value_to_be_defined),

@@ -1,12 +1,27 @@
 #include "file_processing.h"
 
+int CountAmountOfFilsInDir(const char* dir)
+{
+	int file_count = 0;
+
+	DIR* dirp;
+	struct dirent* entry;
+
+	dirp = opendir(dir);
+	while ((entry = readdir(dirp)) != NULL)
+		if (entry->d_type == DT_REG)
+			file_count++;
+
+	closedir(dirp);
+
+	return file_count;
+}
+
 void GetAllNameOfFilesFromDirectory(std::vector<std::string>& namesOfFilesInDirectory, const char* directory)
 {
 	DIR* dirp;
 
 	struct dirent* entry;
-
-	// recieving all names of sound of directory with results
 
 	dirp = opendir(directory);
 
@@ -53,7 +68,7 @@ void Create_Files_For_Results(const std::vector<std::string>& namesOfFiles, cons
 	std::ofstream* files;
 	files = new std::ofstream[namesOfFiles.size()];
 	
-	for (int i = 0; i < gmm_model::amount_of_models; i++)
+	for (int i = 0; i < namesOfFiles.size(); i++)
 	{
 		
 		char dirAndNameOfFile[1000];
@@ -107,5 +122,3 @@ void FixStartAndEndOfSoundInFile(int position, const char* dirWithResults, const
 	file.close();
 
 }
-
-

@@ -1,9 +1,9 @@
-0    - 59  - silence 59
+0    - 59   - silence 59
 60   - 359  - bird 299
-360  - 425 - silence 65
-426  - 575 - shot 149
-576  - 615 - silence 39
-616  - 700 - shot 84
+360  - 425  - silence 65
+426  - 575  - shot 149
+576  - 615  - silence 39
+616  - 700  - shot 84
 701  - 768  - silence 67
 770  - 900  - shooting 130
 901  - 987  - silence 86
