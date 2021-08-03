@@ -135,13 +135,18 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>E:\Wallpapers\Main\CATHEDRA_DEV\C\boost\boost_1_72_0;E:\Wallpapers\Main\CATHEDRA_DEV\C\Armadillo\armadillo-10.1.2\include;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\include;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\src;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\deps\ensmallen-2.14.2\include;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\deps\stb;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\src\mlpack\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\Debug\mlpack.lib;E:\Wallpapers\Main\CATHEDRA_DEV\C\boost\boost_1_72_0\lib64-msvc-14.2\libboost_serialization-vc142-mt-gd-x64-1_72.lib;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\packages\OpenBLAS.0.2.14.1\lib\native\lib\x64\libopenblas.dll.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\packages\OpenBLAS.0.2.14.1\lib\native\bin\x64\*.dll $(OutDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Decision-Maker2.cpp" />
@@ -150,6 +155,7 @@
     <ClCompile Include="output_of_results.cpp" />
     <ClCompile Include="result_processing.cpp" />
     <ClCompile Include="testing_instruments.cpp" />
+    <ClCompile Include="unit_tests\main_test\main_unit_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="file_processing.h" />
@@ -157,6 +163,7 @@
     <ClInclude Include="output_of_results.h" />
     <ClInclude Include="result_processing.h" />
     <ClInclude Include="testing_instruments.h" />
+    <ClInclude Include="unit_tests\main_test\main_unit_test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

@@ -17,7 +17,7 @@
 
 #include "gmm_model.h"
 #include "file_processing.h"
-void Canculate_Probabilities(std::vector<std::vector<double>> &results, std::vector<gmm_model> models, char* testing_file);
+void Canculate_Probabilities(std::vector<std::vector<double>> &results, std::vector<gmm_model> models, const std::string testing_file);
 
 // My teacher said that this is Veiterbi algorithm
 // But it appeared to be useless for us

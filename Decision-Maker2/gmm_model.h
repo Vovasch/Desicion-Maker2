@@ -28,10 +28,6 @@ class gmm_model
 // Function will return 5
 	static double Get_Information_From_Line(char* line);
 
-// Fromig a name of model set will be used by
-// bird.bin -> bird
-	static void Form_Name_of_Model(char* name_of_file);
-
 public:
 
 	gmm_model(std::string name, int max_value_to_be_defined, int min_value_to_be_defined, int smallest_duration_in_santi_seconds_to_be_real, int biggest_duration_in_santi_seconds_to_be_real, const char* dirWithModel) :

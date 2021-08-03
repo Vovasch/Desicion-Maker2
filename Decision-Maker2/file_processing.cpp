@@ -34,9 +34,9 @@ void GetAllNameOfFilesFromDirectory(std::vector<std::string>& namesOfFilesInDire
 	closedir(dirp);
 }
 
-int Get_Amount_Of_Strings_from_File(const char* name_of_file)
+int Get_Amount_Of_Strings_from_File(const std::string name_of_file)
 {
-	if (name_of_file)
+	if (!name_of_file.empty())
 	{
 		std::ifstream file;
 
@@ -73,7 +73,7 @@ void Create_Files_For_Results(const std::vector<std::string>& namesOfFiles, cons
 		
 		char dirAndNameOfFile[1000];
 
-		ConcatinateDirAndNameOfFile(dirAndNameOfFile, directory, namesOfFiles[i]);
+		ConcatinateDirAndNameOfFile(dirAndNameOfFile, namesOfFiles[i], directory);
 		
 		files[i].open(dirAndNameOfFile);
 		files[i].clear();
@@ -81,17 +81,20 @@ void Create_Files_For_Results(const std::vector<std::string>& namesOfFiles, cons
 	}
 }
 
-void ConcatinateDirAndNameOfFile(char* result, const char* dir, const std::string name_of_file)
+void ConcatinateDirAndNameOfFile(char* result, const std::string name_of_file, const char* dir)
 {
-	int i;
-	for (i = 0; dir[i] != '\0'; i++)
+	int i = 0;
+	if (dir != nullptr)
 	{
-		result[i] = dir[i];
+		for (i = 0; dir[i] != '\0'; i++)
+		{
+			result[i] = dir[i];
+		}
+
+
+		result[i] = '/';
+		i++;
 	}
-
-	result[i] = '/';
-	i++;
-
 	for (auto c : name_of_file)
 	{
 		result[i] = c;
@@ -105,7 +108,7 @@ void FixStartAndEndOfSoundInFile(int position, const char* dirWithResults, const
 {
 	char dirAndNameOfFileWhereToSave[1000];
 	
-	ConcatinateDirAndNameOfFile(dirAndNameOfFileWhereToSave, dirWithResults, nameOfFileOfModel);
+	ConcatinateDirAndNameOfFile(dirAndNameOfFileWhereToSave, nameOfFileOfModel, dirWithResults);
 	
 
 	std::ofstream file;
@@ -121,4 +124,17 @@ void FixStartAndEndOfSoundInFile(int position, const char* dirWithResults, const
 
 	file.close();
 
+}
+
+bool DoesThisFileExist(const std::string nameOfFile, const char* dir)
+{
+	std::fstream file;
+
+	char dirAndNameOfFile[1000];
+
+	ConcatinateDirAndNameOfFile(dirAndNameOfFile, nameOfFile, dir);
+
+	file.open(dirAndNameOfFile);
+
+	return file.is_open();
 }

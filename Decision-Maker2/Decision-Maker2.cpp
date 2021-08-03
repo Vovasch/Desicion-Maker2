@@ -14,12 +14,15 @@
 #include <cmath>
 #include <exception>
 #include <thread>
+#include <memory>
 
 #include "file_processing.h"
 #include "gmm_model.h"
 #include "testing_instruments.h"
 #include "result_processing.h"
 #include "output_of_results.h"
+
+#include "unit_tests/main_test/main_unit_test.h"
 
 using namespace std;
 using namespace mlpack;
@@ -28,27 +31,23 @@ using namespace mlpack::util;
 
 int main(int argc, char* argv[])
 {
+#ifdef _DEBUG
+	mainTest();
+#endif
+
 	// all important directories
 
-	//where .bin files stored
-	const char models_Dir[]{ "data/models"};
+	const char models_Dir[]{ "data/models"}; //where .bin files stored
 
-	//where .txt files with desciptions like:
-	//MAX_VALUE_TO_BE_DEFINED: 5.2
-	//MIN_VALUE_TO_BE_DEFINED: 2
-	//THE_LEAST_DURATION : 50
-	//THE_LONGEST_DURATION : -1
-	const char descriptionOfModels_Dir[]{ "data/models_description" };
+	const char descriptionOfModels_Dir[]{ "data/models_description" }; // where.txt files with desciptions of models stored 
 
-	// where results .txt stored
-	const char results_Dir[]{ "results" };
+	const char results_Dir[]{ "results" }; 	// where results .txt stored
 
 	std::vector<std::string> ModelsFileNames;
 	std::vector<std::string> DesciptionsOfModelsFileName;
 	std::vector<std::string> ResultFileNames;
 
-	// amount of data sets
-	const int amountOfModels = CountAmountOfFilsInDir(models_Dir);
+	const int amountOfModels = CountAmountOfFilsInDir(models_Dir); // amount of data sets
 
 	ModelsFileNames.			 reserve(amountOfModels);
 	DesciptionsOfModelsFileName. reserve(amountOfModels);
@@ -64,17 +63,21 @@ int main(int argc, char* argv[])
 	
 
 	// processing a params of main() function
-	char* name_of_main_testing_file;
+
+	std::string name_of_main_testing_file;
 
 	if (argc > 1)
 		name_of_main_testing_file = argv[1];
 	else if (argc <= 1)
-		name_of_main_testing_file = new char[] {"main.txt"};
+		name_of_main_testing_file = { "main.txt" };
 	else
 	{
 		cout << "You have enterd too much parametrs";
 		return 0;
 	}
+
+	if (!(DoesThisFileExist(name_of_main_testing_file)))
+		return 0;
 
 	vector <gmm_model> models_for_test;
 	models_for_test.reserve(amountOfModels);

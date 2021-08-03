@@ -24,7 +24,7 @@ void SimpleShowingOfResults(const char* dir, std::vector<std::string> namesOfFil
 		
 		char dirAndNameOfFile[1000];
 
-		ConcatinateDirAndNameOfFile(dirAndNameOfFile, dir, name);
+		ConcatinateDirAndNameOfFile(dirAndNameOfFile, name, dir);
 
 		std::ifstream file;
 		file.open(dirAndNameOfFile);
@@ -62,7 +62,7 @@ void SortedShowingOfResults(const char* dir, std::vector<std::string> namesOfFil
 
 		char dirAndNameOfFile[1000];
 
-		ConcatinateDirAndNameOfFile(dirAndNameOfFile, dir, name);
+		ConcatinateDirAndNameOfFile(dirAndNameOfFile, name, dir);
 
 		std::ifstream file;
 		file.open(dirAndNameOfFile);

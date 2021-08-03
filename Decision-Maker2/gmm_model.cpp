@@ -10,16 +10,6 @@ double gmm_model::Get_Information_From_Line(char* line)
     return atof(&line[i]);
 }
 
-void gmm_model::Form_Name_of_Model(char* name_of_file)
-{
-    int lenght_of_File_tipe = 4; //.txt
-
-    int i = 0;
-    while (name_of_file[i] != '\0')
-        ++i;
-    name_of_file[i - lenght_of_File_tipe] = '\0';
-}
-
 void gmm_model::Upload_Models(std::vector<gmm_model>& models, 
     const char* dirWitDescriptionOfModels,
     const char* dirWithModels,
@@ -37,7 +27,7 @@ void gmm_model::Upload_Models(std::vector<gmm_model>& models,
 
         char directoryAndNameOfDescribingFile[1000];
 
-        ConcatinateDirAndNameOfFile(directoryAndNameOfDescribingFile, dirWitDescriptionOfModels, namesOfFilesWithDescriptionOfModels[i]);
+        ConcatinateDirAndNameOfFile(directoryAndNameOfDescribingFile, namesOfFilesWithDescriptionOfModels[i], dirWitDescriptionOfModels);
 
         describing_file.open(directoryAndNameOfDescribingFile);
 
@@ -53,7 +43,7 @@ void gmm_model::Upload_Models(std::vector<gmm_model>& models,
         }
 
         char directoryAndNameOfModel[1000];
-        ConcatinateDirAndNameOfFile(directoryAndNameOfModel, dirWithModels, namesOfFilesWithModels[i]);
+        ConcatinateDirAndNameOfFile(directoryAndNameOfModel, namesOfFilesWithModels[i], dirWithModels);
 
         gmm_model gmm(namesOfFilesWithModels[i], params[0], params[1], params[2], params[3], directoryAndNameOfModel);
 
