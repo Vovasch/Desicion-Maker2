@@ -152,17 +152,17 @@
     <ClCompile Include="Decision-Maker2.cpp" />
     <ClCompile Include="file_processing.cpp" />
     <ClCompile Include="gmm_model.cpp" />
+    <ClCompile Include="measurement_instruments.cpp" />
     <ClCompile Include="output_of_results.cpp" />
     <ClCompile Include="result_processing.cpp" />
-    <ClCompile Include="testing_instruments.cpp" />
     <ClCompile Include="unit_tests\main_test\main_unit_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="file_processing.h" />
     <ClInclude Include="gmm_model.h" />
+    <ClInclude Include="measurement_instruments.h" />
     <ClInclude Include="output_of_results.h" />
     <ClInclude Include="result_processing.h" />
-    <ClInclude Include="testing_instruments.h" />
     <ClInclude Include="unit_tests\main_test\main_unit_test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

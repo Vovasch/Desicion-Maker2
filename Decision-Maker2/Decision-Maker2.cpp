@@ -18,7 +18,7 @@
 
 #include "file_processing.h"
 #include "gmm_model.h"
-#include "testing_instruments.h"
+#include "measurement_instruments.h"
 #include "result_processing.h"
 #include "output_of_results.h"
 
@@ -43,12 +43,14 @@ int main(int argc, char* argv[])
 
 	const char results_Dir[]{ "results" }; 	// where results .txt stored
 
-	std::vector<std::string> ModelsFileNames;
-	std::vector<std::string> DesciptionsOfModelsFileName;
-	std::vector<std::string> ResultFileNames;
+	// where all names of file will be stored
+	std::vector<std::string> ModelsFileNames; // .bin files 
+	std::vector<std::string> DesciptionsOfModelsFileName; // .txt files with descriptins
+	std::vector<std::string> ResultFileNames; // .txt files with results, will be created based on files with descriptions
 
 	const int amountOfModels = CountAmountOfFilsInDir(models_Dir); // amount of data sets
 
+	// for each model we have file with description and result
 	ModelsFileNames.			 reserve(amountOfModels);
 	DesciptionsOfModelsFileName. reserve(amountOfModels);
 	ResultFileNames.			 reserve(amountOfModels);
@@ -76,6 +78,7 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
+	// check if file we need to test exist
 	if (!(DoesThisFileExist(name_of_main_testing_file)))
 		return 0;
 
@@ -97,6 +100,7 @@ int main(int argc, char* argv[])
 
 	try
 	{
+		// using mlpack instuments canculate how different each string if file from each model
 		Canculate_Probabilities(probabilities, models_for_test, name_of_main_testing_file);
 	}
 	catch (std::exception& ex)
@@ -105,6 +109,7 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 	
+	// finding best results for each model to define which and what sound was
 	Rough_MurkUp(probabilities, models_for_test, results_Dir, ResultFileNames);
 
 	SortedShowingOfResults(results_Dir, ResultFileNames);
