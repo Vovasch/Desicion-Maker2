@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Wallpapers\Main\CATHEDRA_DEV\C\boost\boost_1_72_0;E:\Wallpapers\Main\CATHEDRA_DEV\C\Armadillo\armadillo-10.1.2\include;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\include;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\src;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\deps\ensmallen-2.14.2\include;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\deps\stb;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\src\mlpack\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Wallpapers\Main\CATHEDRA_DEV\C\boost\boost_1_72_0;E:\Wallpapers\Main\CATHEDRA_DEV\C\Armadillo\armadillo-10.1.2\include;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\include;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\src;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\deps\ensmallen-2.14.2\include;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\deps\stb;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\src\mlpack\..;E:\Visual studio\Comunity2019\VC\Tools\MSVC\14.28.29333\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,7 +135,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Wallpapers\Main\CATHEDRA_DEV\C\boost\boost_1_72_0;E:\Wallpapers\Main\CATHEDRA_DEV\C\Armadillo\armadillo-10.1.2\include;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\include;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\src;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\deps\ensmallen-2.14.2\include;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\deps\stb;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\src\mlpack\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Wallpapers\Main\CATHEDRA_DEV\C\boost\boost_1_72_0;E:\Wallpapers\Main\CATHEDRA_DEV\C\Armadillo\armadillo-10.1.2\include;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\include;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\src;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\deps\ensmallen-2.14.2\include;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\deps\stb;E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\src\mlpack\..;E:\Visual studio\Comunity2019\VC\Tools\MSVC\14.28.29333\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

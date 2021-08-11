@@ -1,9 +1,9 @@
 #include "output_of_results.h"
 
-std::string ConvertNameOfFileIntoName(const std::string nameOfFile)
+std::string Result_Shower::ConvertNameOfFileIntoName(const std::string nameOfFile)
 {
 	std::string name{ nameOfFile };
-	
+
 	char a = name.back();
 
 	// erasing .txt
@@ -16,12 +16,12 @@ std::string ConvertNameOfFileIntoName(const std::string nameOfFile)
 	return name;
 }
 
-void SimpleShowingOfResults(const char* dir, std::vector<std::string> namesOfFiles)
+void Simple_Result_Shower::Show_Results(const char* dir, std::vector<std::string> namesOfFiles)
 {
 	for (auto name : namesOfFiles)
 	{
 		std::cout << ConvertNameOfFileIntoName(name) << std::endl;
-		
+
 		char dirAndNameOfFile[1000];
 
 		ConcatinateDirAndNameOfFile(dirAndNameOfFile, name, dir);
@@ -34,7 +34,7 @@ void SimpleShowingOfResults(const char* dir, std::vector<std::string> namesOfFil
 			char buf[1000];
 
 			file.getline(buf, 1000);
-			std::cout << buf<<std::endl;
+			std::cout << buf << std::endl;
 		}
 		std::cout << std::endl;
 
@@ -42,7 +42,7 @@ void SimpleShowingOfResults(const char* dir, std::vector<std::string> namesOfFil
 	}
 }
 
-void SortedShowingOfResults(const char* dir, std::vector<std::string> namesOfFiles)
+void SortedShowindOfResults::Show_Results(const char* dir, std::vector<std::string> namesOfFiles)
 {
 	struct Name_Pos_StartOrEnd
 	{
@@ -58,7 +58,7 @@ void SortedShowingOfResults(const char* dir, std::vector<std::string> namesOfFil
 		Name_Pos_StartOrEnd current;
 		current.StartOrEnd = 1;
 
-		current.name =  ConvertNameOfFileIntoName(name);
+		current.name = ConvertNameOfFileIntoName(name);
 
 		char dirAndNameOfFile[1000];
 
@@ -76,19 +76,32 @@ void SortedShowingOfResults(const char* dir, std::vector<std::string> namesOfFil
 			current.StartOrEnd = !current.StartOrEnd;
 			results.push_back(current);
 		}
-		
+
 		results.pop_back();
 		file.close();
 	}
 
-	std::sort(results.begin(), results.end(), [](Name_Pos_StartOrEnd a, Name_Pos_StartOrEnd b) 
-	{
-		return a.pos < b.pos;
-	});
+	std::sort(results.begin(), results.end(), [](Name_Pos_StartOrEnd a, Name_Pos_StartOrEnd b)
+		{
+			return a.pos < b.pos;
+		});
 
 	for (auto item : results)
 	{
 		std::cout << item.pos << " || " << item.name << " " << item.StartOrEnd << std::endl;
 	}
 
+	std::cout << std::endl;
+
+}
+
+void ResultStrategy::Set_Strategy(std::unique_ptr<Result_Shower> resultShower)
+{
+	this->resultShower = std::move(resultShower);
+
+}
+
+void ResultStrategy::Execute_Strategy(const char* dir, std::vector<std::string> namesOfFiles)
+{
+	this->resultShower.get()->Show_Results(dir,  namesOfFiles);
 }

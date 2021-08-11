@@ -101,15 +101,15 @@ void Rough_MurkUp(const std::vector<std::vector<double>>& probabilites, const st
 			{
 				if (averageOfProbabilitesCurrent[e] < models[e].Get_Min_Value_To_Be_Defined())
 				{
-					FixStartAndEndOfSoundInFile(i- models[e].Get_Smallest_Duration(), dirWithWhereToSaveResults, nameOfFilesWhereToSaveResults[e]);
+					FixStartAndEndOfSoundInFile(i, dirWithWhereToSaveResults, nameOfFilesWhereToSaveResults[e]);
 					lookForEndingOfSound[e] = 0;
 				}
 			}
 		}
 
-		if (i % 200 == 0)
+		/*if (i % 200 == 0)
 		{
-			// show results
-		}
+			
+		}*/
 	}
 }

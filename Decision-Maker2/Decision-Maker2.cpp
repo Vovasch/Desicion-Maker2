@@ -4,6 +4,7 @@
  * @thanks to Viktoria Megalatium
  */
 
+
 #include <iostream>
 #include <string>
 #include <mlpack/core/util/io.hpp>
@@ -32,7 +33,7 @@ using namespace mlpack::util;
 int main(int argc, char* argv[])
 {
 #ifdef _DEBUG
-	mainTest();
+	//mainTest();
 #endif
 
 	// all important directories
@@ -112,7 +113,14 @@ int main(int argc, char* argv[])
 	// finding best results for each model to define which and what sound was
 	Rough_MurkUp(probabilities, models_for_test, results_Dir, ResultFileNames);
 
-	SortedShowingOfResults(results_Dir, ResultFileNames);
+	ResultStrategy resultStrategy;
+
+	std::unique_ptr< Result_Shower> a(new Simple_Result_Shower());
+	
+
+	resultStrategy.Set_Strategy(std::move(a));
+
+	resultStrategy.Execute_Strategy(results_Dir, ResultFileNames);
 
 	system("Pause");
 	return 0;

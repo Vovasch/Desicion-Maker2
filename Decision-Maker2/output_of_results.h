@@ -9,17 +9,46 @@
 #include<iostream>
 #include<sstream>
 #include<algorithm>
+#include<memory>
 
 #include "dirent.h"
 #include "file_processing.h"
 
-// bird.txt -> Bird
-std::string ConvertNameOfFileIntoName(const std::string nameOfFile);
+class Result_Shower
+{
+protected:
+	// bird.txt -> Bird
+	std::string ConvertNameOfFileIntoName(const std::string nameOfFile);
 
-void SimpleShowingOfResults(const char* dir, std::vector<std::string> namesOfFiles);
+public:
+	void virtual Show_Results(const char* dir, std::vector<std::string> namesOfFiles) = 0;
+};
 
-void SortedShowingOfResults(const char* dir, std::vector<std::string> namesOfFiles);
+class Simple_Result_Shower : public Result_Shower
+{
+public:
+	void Show_Results(const char* dir, std::vector<std::string> namesOfFiles) override;
 
+};
+
+class SortedShowindOfResults : public Result_Shower
+{
+public:
+	void Show_Results(const char* dir, std::vector<std::string> namesOfFiles) override;
+};
+
+class ResultStrategy
+{
+private:
+	std::unique_ptr<Result_Shower> resultShower;
+public:
+
+	void Set_Strategy(std::unique_ptr<Result_Shower> resultShower);
+
+	void Execute_Strategy(const char* dir, std::vector<std::string> namesOfFiles);
+
+	
+};
 
 
 #endif OUTPUT_OF_RESULTS
