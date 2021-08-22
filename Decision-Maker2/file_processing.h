@@ -26,4 +26,5 @@ void FixStartAndEndOfSoundInFile(int position, const char* dirWithResults, const
 
 bool DoesThisFileExist(const std::string nameOfFile, const char* dir = nullptr);
 
+void ShowFileOnConsole(const std::string nameOfFile, const char* dir = nullptr);
 #endif

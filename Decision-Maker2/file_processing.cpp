@@ -138,3 +138,22 @@ bool DoesThisFileExist(const std::string nameOfFile, const char* dir)
 
 	return file.is_open();
 }
+
+void ShowFileOnConsole(const std::string nameOfFile, const char* dir)
+{
+	std::fstream file;
+	char dirAndNameOfFile[1000];
+	ConcatinateDirAndNameOfFile(dirAndNameOfFile, nameOfFile, dir);
+
+	file.open(dirAndNameOfFile);
+
+	if (file.is_open());
+
+
+	while (!file.eof())
+	{
+		char buff[1000];
+		file.getline(buff, 1000);
+		std::cout << buff << std::endl;
+	}
+}

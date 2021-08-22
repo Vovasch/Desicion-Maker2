@@ -21,7 +21,7 @@
 #include "gmm_model.h"
 #include "measurement_instruments.h"
 #include "result_processing.h"
-#include "output_of_results.h"
+
 
 #include "unit_tests/main_test/main_unit_test.h"
 
@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 
 	// all important directories
 
-	const char models_Dir[]{ "data/models"}; //where .bin files stored
+	const char models_Dir[]{ "data/models" }; //where .bin files stored
 
 	const char descriptionOfModels_Dir[]{ "data/models_description" }; // where.txt files with desciptions of models stored 
 
@@ -52,18 +52,18 @@ int main(int argc, char* argv[])
 	const int amountOfModels = CountAmountOfFilsInDir(models_Dir); // amount of data sets
 
 	// for each model we have file with description and result
-	ModelsFileNames.			 reserve(amountOfModels);
-	DesciptionsOfModelsFileName. reserve(amountOfModels);
-	ResultFileNames.			 reserve(amountOfModels);
+	ModelsFileNames.reserve(amountOfModels);
+	DesciptionsOfModelsFileName.reserve(amountOfModels);
+	ResultFileNames.reserve(amountOfModels);
 
-	GetAllNameOfFilesFromDirectory(ModelsFileNames,				models_Dir);
+	GetAllNameOfFilesFromDirectory(ModelsFileNames, models_Dir);
 	GetAllNameOfFilesFromDirectory(DesciptionsOfModelsFileName, descriptionOfModels_Dir);
 
 	// types and names of files with results and models descriptions are same
 	ResultFileNames = DesciptionsOfModelsFileName;
 
 	Create_Files_For_Results(ResultFileNames, results_Dir);
-	
+
 
 	// processing a params of main() function
 
@@ -82,7 +82,11 @@ int main(int argc, char* argv[])
 	// check if file we need to test exist
 	if (!(DoesThisFileExist(name_of_main_testing_file)))
 		return 0;
+	
+	//where results will be wrighten
+	const std::string nameOfFileWithResults{ "results.txt" };
 
+	
 	vector <gmm_model> models_for_test;
 	models_for_test.reserve(amountOfModels);
 
@@ -113,14 +117,17 @@ int main(int argc, char* argv[])
 	// finding best results for each model to define which and what sound was
 	Rough_MurkUp(probabilities, models_for_test, results_Dir, ResultFileNames);
 
-	ResultStrategy resultStrategy;
+	ResultSavingStrategy resultSavingStrategy;
 
-	std::unique_ptr< Result_Shower> a(new Simple_Result_Shower());
+	std::unique_ptr< Result_Saver> a(new SortedSavingOfResults());  // 1)Simple_Result_Saver
+																	// 2)SortedSavingOfResults 
 	
 
-	resultStrategy.Set_Strategy(std::move(a));
+	resultSavingStrategy.Set_Strategy(std::move(a));
 
-	resultStrategy.Execute_Strategy(results_Dir, ResultFileNames);
+	resultSavingStrategy.Execute_Strategy(results_Dir, ResultFileNames, nameOfFileWithResults, probabilities);
+
+	ShowFileOnConsole(nameOfFileWithResults);
 
 	system("Pause");
 	return 0;

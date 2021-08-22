@@ -1,7 +1,0 @@
-E:\Wallpapers\Main\CATHEDRA_DEV\C\boost\boost_1_72_0
-E:\Wallpapers\Main\CATHEDRA_DEV\C\Armadillo\armadillo-10.1.2\include
-E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\include
-E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\src
-E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\deps\ensmallen-2.14.2\include
-E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\deps\stb
-E:\Wallpapers\Main\CATHEDRA_DEV\C\mlpack\mlpack-3.4.2\build\src\mlpack\..

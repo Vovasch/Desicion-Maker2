@@ -27,9 +27,6 @@
     <ClCompile Include="result_processing.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="output_of_results.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="unit_tests\main_test\main_unit_test.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -45,9 +42,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="result_processing.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="output_of_results.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="unit_tests\main_test\main_unit_test.h">
